@@ -11,6 +11,12 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^5.9.0"
+    "mongoose": "^5.9.0",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "express-handlebars": "^3.1.0",
+    "handlebars": "^4.5.0",
+    "nodemon": "^2.0.2"
   }
 }

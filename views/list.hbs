@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="list.css">
+</head>
+<body>
+    <h1>
+        Users
+    </h1>
+
+    <table>
+        <tr>
+            <th>Document</th>
+            <th>Description</th>
+        </tr>
+        {{#each data}}
+        <tr>
+            <td>{{this.title}}</td>
+            <td>{{this.description}}</td>
+        </tr>
+        {{/each}}
+    </table>
+</body>
+</html>

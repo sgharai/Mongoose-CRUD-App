@@ -1,20 +1,36 @@
 const express = require('express')
 const app = express()
-const port = 3002
+const port = 3003
 const mongoose = require('mongoose')
-const uri = "mongodb+srv://{USERNAME}:<PASSWORD>@cluster0-rbluw.mongodb.net/test?retryWrites=true&w=majority"
+const uri = "mongodb+srv://sgharai:sofia0o0@cluster0-rbluw.mongodb.net/test?retryWrites=true&w=majority"
 const Schema = mongoose.Schema;
 const bodyParser = require('body-parser')
+const expressHandlebars = require('express-handlebars')
+const path = require('path'); 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}))
 
-const Doc = require('./Docs.model')
-const User = require('./User.model')
+const Doc = require('./models/Docs.model')
+const User = require('./models/User.model')
 
 mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true})
 
-app.get('/', (req, res) => res.send('Hello World!'))
+app.set('views', path.join(__dirname), '/views/')
+app.use(express.static(path.join(__dirname, '/views')));
+
+app.engine('hbs', expressHandlebars({
+    extname: 'hbs',
+    defaultLayout: 'mainLayout',
+    layoutsDir: __dirname + '/views/layout'
+}))
+
+app.set('view engine', 'hbs')
+
+app.get('/', (req, res) => {
+    res.render('./views/index', {})
+})
+
 
 //CRUD for documents
 app.post('/addDoc', (req, res) => {
@@ -44,7 +60,8 @@ app.get('/docs',(req, res) => {
             res.status(400).send("An error has occurred")
         }
         else{
-            res.status(200).json(docs)
+            // res.status(200).json(docs)
+            res.render("./views/list", { data: docs})
         }
     })
 })
@@ -98,7 +115,10 @@ app.post('/addUser', (req, res) => {
         }
     })
 })
+
+
 // to add post request on postman: go to localhost URL with /addUser extn, fix headers to be Accept and Content Type with application/json, put JSON user object in body 
+
 
 
 app.listen(port, () => console.log(`Listening on port ${port}`))
