@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const port = 3003
 const mongoose = require('mongoose')
-const uri = "mongodb+srv://sgharai:sofia0o0@cluster0-rbluw.mongodb.net/test?retryWrites=true&w=majority"
+const uri = "mongodb+srv://sgharai:<PASSWORD>@cluster0-rbluw.mongodb.net/test?retryWrites=true&w=majority"
 const Schema = mongoose.Schema;
 const bodyParser = require('body-parser')
 const expressHandlebars = require('express-handlebars')
